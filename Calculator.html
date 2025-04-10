@@ -1,0 +1,47 @@
+<html>
+<head>
+<style>
+  #Q {
+    width: 300px; /* Adjust width as needed */
+    font-size: 24px; /* Adjust font size as needed */
+    text-align: center;
+    padding: 10px;
+  }
+
+  #A {
+    font-size: 24px; /* Adjust font size as needed */
+    text-align: center;
+    padding: 10px;
+  }
+</style>
+<script>
+  function Loop() {
+    setInterval(function() {
+      Calc();
+    }, 100); // Changed interval to 100 milliseconds for smoother response
+  }
+
+  function Calc() {
+    const inputValue = document.getElementById("Q").value; // Get the value from the input field
+    const result = calculate(inputValue); // Use a safer calculation function
+    document.getElementById("A").textContent = result;
+  }
+
+  function calculate(expression) {
+    // Implement a safe calculation function here
+    // Example:
+    try {
+      return Function('"use strict";return (' + expression + ')')();
+    } catch (error) {
+      return Q.value;
+    }
+  }
+
+  window.onload = Loop;
+</script>
+</head>
+<body onload="Loop();">
+  <input id="Q" type="text">
+  <span id="A">Output</span>
+</body>
+</html>
